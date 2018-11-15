@@ -1,12 +1,10 @@
 package SelectionSortPackage;
 import java.lang.Math;
+
 public class Dataset {
 	private int values[];
-
-
 	//Instantiates this.values with random number of elements
-	public Dataset() {
-		
+	public Dataset() {		
 		this.values = new int[14];
 		for (int i =0; i < 14; i++) {
 			this.values[i] = (int) (Math.random() * 100) + 1;
@@ -33,6 +31,10 @@ public class Dataset {
 
 	//@Overide
 	public String toString() {
-		return "Values in dataset: " + this.getValues();
+		String output = "";
+		for (int i = 0; i < this.values.length; i++) {
+			output += this.values[i];
+		}
+		return output;
 	}
 }
