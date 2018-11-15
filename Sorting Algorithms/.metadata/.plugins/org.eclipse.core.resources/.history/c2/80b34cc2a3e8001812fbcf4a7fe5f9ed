@@ -1,0 +1,13 @@
+package SelectionSortPackage;
+
+import java.lang.Math;
+public class Test_Selection_Sorter {
+	public static void main(String args[]) {
+
+		Dataset data = new Dataset(4);
+		System.out.print(data +
+				" --");
+		Selection_Sorter ss = new Selection_Sorter();
+		ss.sortData(data.getValues() );
+	}
+}

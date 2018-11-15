@@ -1,0 +1,26 @@
+package SelectionSortPackage;
+
+public class Selection_Sorter {
+
+	//Sorts dataSet with selection sort
+	public static int[] sortData(int [] dataSet) {
+	//write selection sort algorithm!!!
+		int minIndex;// = dataSet[0];
+		
+		for (int i =0; i < dataSet.length - 1; i++) {
+			minIndex = dataSet[i];
+			for (int j = i+1; j < dataSet.length ; j++) {
+				if (dataSet[j] < dataSet[minIndex]) {
+					minIndex = j;
+				}
+				int temp = dataSet[i];
+				
+				dataSet[i] = dataSet[minIndex];
+				dataSet[minIndex] = temp;
+			}
+			
+		}
+		
+		return dataSet;
+	}
+}

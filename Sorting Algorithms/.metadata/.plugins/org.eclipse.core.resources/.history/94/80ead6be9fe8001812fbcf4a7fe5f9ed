@@ -1,0 +1,30 @@
+package SelectionSortPackage;
+import java.lang.Math;
+public class Dataset {
+	private int values[];
+	
+	
+	
+	//Instantiates this.values with random number of elements
+	void Dataset() {
+		for (int i =0; i < 14; i++) {
+			this.values[i] = (int) (Math.random() * 100) + 1;
+		}
+		
+	}
+	
+	
+	//Instantiates this.values with "length" values
+	public void Dataset(int length) {
+		for (int i =0; i < length; i++) {
+			this.values[i] = (int) (Math.random() * 100) + 1;
+		}
+		
+	}
+
+	
+	//Returns the array of values in this data set
+	public int[] getValues() {
+		return this.values;
+	}
+}
