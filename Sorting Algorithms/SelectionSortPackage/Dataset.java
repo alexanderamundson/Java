@@ -23,7 +23,7 @@ public class Dataset {
 	}
 
 
-	//Returns the array of values in this data set
+	//Returns the instance array of values in this data set
 	public int[] getValues() {
 		return this.values;
 	}
