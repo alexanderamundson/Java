@@ -4,6 +4,7 @@ public class Selection_Sorter {
 
 	//Sorts dataSet with selection sort
 	public static void sortData(int [] dataSet) {
+		displayUnsortedArray(dataSet);
 		int minIndex;
 		for (int i =0; i < dataSet.length - 1; i++) {
 			minIndex = i;
@@ -23,10 +24,19 @@ public class Selection_Sorter {
 	}
 	
 	
+	//displays the array before sorting
+		static void displayUnsortedArray(int[] data) {
+			System.out.println("\nArray BEFORE sorting: ");
+			for (int i=0; i < data.length; i++) {
+				System.out.print(data[i] + ", ");
+			}
+		}
+	
 	//displays the array after sorting
 	static void displaySortedArray(int[] data) {
+		System.out.println("\n\nArray AFTER sorting: ");
 		for (int i=0; i < data.length; i++) {
-			System.out.println(data[i] + "   ");
+			System.out.print(data[i] + ", ");
 		}
 	}
 }
