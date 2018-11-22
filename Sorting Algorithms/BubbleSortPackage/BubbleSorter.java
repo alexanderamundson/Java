@@ -1,7 +1,7 @@
 package BubbleSortPackage;
 
 public class BubbleSorter {
-
+	//sorts the input array in ascending order with bubble sort
 	public static void sortData(int [] array) {
 		displayUnsortedArray(array);
 		for (int i=0; i < array.length; i++ ) {
