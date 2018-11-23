@@ -39,4 +39,11 @@ public class Selection_Sorter {
 			System.out.print(data[i] + ", ");
 		}
 	}
+
+/*
+Time efficiency
+Comparisons: n(n-1)/2
+Exchanges: n (swapping largest into place)
+Overall: ?(n2), best and worst cases
+*/
 }
