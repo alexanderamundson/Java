@@ -44,6 +44,7 @@ public class Process {
 		this.state = state;
 	}
 	
+	//increments the wait time by one
 	void updateWaitTime() {
 		this.waitTime++;
 	}

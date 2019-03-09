@@ -2,14 +2,19 @@
 public class CPU_Core {
 	private Process executingProcess;
 	
+	CPU_Core() {
+		this.executingProcess=null;
+	}
 	
+	//Assigns a process to the CPU
 	void setProcess(Process process) { 
 		this.executingProcess = process;
 	}
 	
-	String snapshot() {
+	//returns snapshot of process being executed
+	String processSnapshot() {
 		if (this.executingProcess != null) {
-			return this.executingProcess.;
+			return this.executingProcess.snapshot();
 		}else { 
 			return "------------------------------";
 		}
