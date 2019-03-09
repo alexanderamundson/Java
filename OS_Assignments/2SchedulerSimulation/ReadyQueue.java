@@ -1,8 +1,7 @@
 // Java program for array implementation of queue 
 
 // A class to represent a queue 
-class ReadyQueue 
-{ 
+class ReadyQueue { 
 	int front, rear, size; 
 	int capacity = 11; 
 	Process processList[]; 

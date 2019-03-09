@@ -51,6 +51,6 @@ public class Process {
 	
 	String snapshot() {
 		return this.PID + "\t|" + this.priority
-				+ "\t|" + this.burstLength;
+				+ "\t\t|" + this.burstLength;
 	}
 }
