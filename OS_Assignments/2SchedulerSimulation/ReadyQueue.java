@@ -1,6 +1,4 @@
-// Java program for array implementation of queue 
-
-// A class to represent a queue 
+//Ready queue holds all waiting processes
 class ReadyQueue { 
 	int front, rear, size; 
 	int capacity = 11; 
@@ -12,19 +10,17 @@ class ReadyQueue {
 		processList = new Process[11]; 
 	} 
 	
-	// Queue is full when size becomes equal to 
-	// the capacity 
+	 
 	boolean isFull( ReadyQueue queue) {
 		return (queue.capacity == queue.size); 
 	} 
 	
-	// Queue is empty when size is 0 
+	
 	boolean isEmpty( ReadyQueue queue) { 
 		return (queue.size < 1); 
 	} 
 	
-	// Method to add an item to the queue. 
-	// It changes rear and size 
+	 
 	String addProcess( Process item) { 
 		if (isFull(this)) 
 			return "Ready Queue is full! Can't add process"; 
@@ -34,8 +30,7 @@ class ReadyQueue {
 		return ("Process "+item.getID()+ " added to queue"); 
 	} 
 	
-	// Method to remove an item from queue. 
-	// It changes front and size 
+	
 	Process removeProcess() { 
 		if (isEmpty(this)) { 
 			return null; 
@@ -47,7 +42,7 @@ class ReadyQueue {
 		return item; 
 	} 
 	
-	// Method to get front of queue 
+	 
 	Process showFront() { 
 		if (isEmpty(this)) 
 			return null; 
@@ -55,7 +50,7 @@ class ReadyQueue {
 		return this.processList[this.front]; 
 	} 
 		
-	// Method to get rear of queue 
+	 
 	Process showRear() { 
 		if (isEmpty(this)) 
 			return null; 
