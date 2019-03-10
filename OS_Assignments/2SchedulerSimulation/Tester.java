@@ -1,5 +1,6 @@
 //Alex Amundson
-//CS 4  (operating systems)
+//CS 4345  (operating systems)
+//Spring2019
 //Assignment2 (CPU scheduling algorithms simulation)
 import java.util.Random;
 import java.util.Scanner;
@@ -18,15 +19,16 @@ public class Tester {
 		//Allow user to create new processes
 		createNewProcesses();
 		
-		int processingTime = getTotalBurstTimes();
-
+		//int processingTime = getTotalBurstTimes();
+		
 		//(i) Non-preemptive SJF
 		SJF runSJF = new SJF(readyQueue);
-		runSJF.run();
-		/*
+		float avg1 = runSJF.run();
+		readyQueue.resetQueue();
 		//(ii) Non-preemptive priority
 		nonPreemptivePriority runNPP = new nonPreemptivePriority(readyQueue);
-		//(iii) round robin with time quantum 20.
+		float avg2 = runNPP.run();
+		/*(iii) round robin with time quantum 20.
 		RoundRobin runRR = new RoundRobin(readyQueue);
 		*/
 	}//end of main method
@@ -112,14 +114,14 @@ public class Tester {
 		while (keepTrying) {
 			System.out.println("Enter a Process ID ( 0-10)" );
 			userID = scan.nextInt();
-			System.out.println("ID " + userID + " is available?  " + PIDavailable(userID));////
+			//System.out.println("ID " + userID + " is available?  " + PIDavailable(userID));////
 			if (PIDavailable(userID)) {//Check if user inputs valid ID
 				keepTrying = false;
 				userBurst = validateBurstLength();
 				userPriority = validatePriority();
 				Process p = new Process(userID, userBurst , userPriority);
 				readyQueue.addProcess(p);
-				System.out.println("\n\n!USER Added process " + p.getID() + "---queue size is now: " + readyQueue.size);////
+				System.out.println("\nYou Created process " + p.getID() + "---queue size is now: " + readyQueue.size);////
 
 			} else {
 				System.out.println("Try again!");

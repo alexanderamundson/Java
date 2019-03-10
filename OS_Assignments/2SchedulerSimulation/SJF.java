@@ -1,8 +1,11 @@
-
+//Alex Amundson
+//CS 4345  (operating systems)
+//Spring2019
+//Assignment2 (CPU scheduling algorithms simulation)
 public class SJF {
 	private ReadyQueue queue;
 	float averageWaitTime;
-	CPU_Core cpu1 = new CPU_Core();
+	CPU_Core cpu1 = new CPU_Core("CPU Core1");
 	
 	SJF(ReadyQueue q){
 		this.queue = q;
@@ -20,7 +23,7 @@ public class SJF {
 
 	5. terminate that process
 	*/
-	void run() {
+	float run() {
 		int times = 4;
 		while (!this.queue.allTerminated()) { //runs until all processes have terminated
 		   
@@ -36,12 +39,30 @@ public class SJF {
 		
 		times--;
 		}//end of while loop
-		System.out.println("--------------- ALL DONE\n  HERE's what happened");
-		System.out.println("\nID\tPriority\tBurstLength\tWaitTime");
+		displayResults();
+		return getAverageWait();
+	}//end of run method
+
+	private void displayResults() {
+		System.out.println("\n--------ShortestJobFirst (with priority)--------");
+		System.out.println("ID\tPriority\tBurstLength\tWaitTime");
 		for(int i =0; i < this.queue.size; i++) {
 			System.out.println( this.queue.processList[i].finalSnapshot());
 		}
-	}//end of run method
+		System.out.println("Average Wait time: " + getAverageWait()  );
+		
+		
+	}
+
+	private float getAverageWait() {
+		int totalWait = 0;
+		float avgWait = 0;
+		for(int i =0; i < this.queue.size; i++) {
+			totalWait += this.queue.processList[i].getWaitTime();
+		}
+		avgWait = this.queue.size;
+	    return avgWait;
+	}
 	
 	
 	

@@ -1,6 +1,8 @@
-// Java program for array implementation of queue 
+//Alex Amundson
+//CS 4345  (operating systems)
+//Spring2019
+//Assignment2 (CPU scheduling algorithms simulation)
 
-// A class to represent a queue 
 class ReadyQueue { 
 	int front, rear, size; 
 	int capacity = 11; 
@@ -81,9 +83,8 @@ class ReadyQueue {
 					}
 				}
 			}
-			
 		}
-		System.out.println("Next is: " + this.processList[shortestProcess].getID() + " with priority: "+ this.processList[shortestProcess].getPriority());
+		//System.out.println("Next is: " + this.processList[shortestProcess].getID() + " with priority: "+ this.processList[shortestProcess].getPriority());
 		this.processList[shortestProcess].terminateProcess();//technically not terminated just yet
 		return this.processList[shortestProcess]; 
 	} 
@@ -113,6 +114,8 @@ class ReadyQueue {
     	return highest;
     } 
     
+    
+    
     //returns true if all processes are terminated
     boolean allTerminated() {
     	boolean finished = false;
@@ -125,6 +128,29 @@ class ReadyQueue {
 			}	
 		}
     	return true;
+    }
+    
+    //Returns Ready process with highest priority
+    Process getNextProcess() {
+		int highest = this.getHighestPriority();
+		int nextProcess = 1000;//this.processList[this.front].getBurstLength();
+		//int times=0;
+		for (int i =0; i < this.size; i++) {
+			if (this.processList[i].getState() == "Ready") {//make sure its in Ready state!!!			
+				if (  this.processList[i].getPriority() == highest) {
+					nextProcess = i; break;
+				}
+			}
+		}//end for loop
+		this.processList[nextProcess].terminateProcess();
+		return this.processList[nextProcess];
+	}
+    
+    void resetQueue() {
+    	for (int i =0; i < this.size; i++) {
+    		this.processList[i].setState("Ready");
+    		this.processList[i].resetWaitTime();
+    	}
     }
     
 } 

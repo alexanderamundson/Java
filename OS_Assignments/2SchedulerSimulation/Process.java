@@ -1,4 +1,7 @@
-
+//Alex Amundson
+//CS 4345  (operating systems)
+//Spring2019
+//Assignment2 (CPU scheduling algorithms simulation)
 public class Process {
 	private int PID;
 	private int burstLength;
@@ -51,12 +54,12 @@ public class Process {
 	
 	void executeProcess() {
 		this.state = "Executing";
-		System.out.println("Process " + this.PID + " is running!" + "-- priority" + this.priority);
+		//System.out.println("Process " + this.PID + " is running!" + "-- priority" + this.priority);
 	}
 	
 	//increments the wait time by one
-	void updateWaitTime() {
-		this.waitTime++;
+	void resetWaitTime() {
+		this.waitTime = 0;
 	}
 	
 	
