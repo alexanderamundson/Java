@@ -10,6 +10,7 @@ public class Process {
 		this.PID=id;
 		this.burstLength=burst;
 		this.priority=priority;
+		this.state = "Ready";
 	}
 	
 	int getID() {
@@ -44,13 +45,36 @@ public class Process {
 		this.state = state;
 	}
 	
+	void terminateProcess() {
+		this.state = "Terminated";
+	}
+	
+	void executeProcess() {
+		this.state = "Executing";
+		System.out.println("Process " + this.PID + " is running!" + "-- priority" + this.priority);
+	}
+	
 	//increments the wait time by one
 	void updateWaitTime() {
 		this.waitTime++;
 	}
 	
+	
+	void updateWaitTime(int waitingTime) {
+		this.waitTime+= waitingTime;
+	}
+	
+	int getWaitTime() {
+		return this.waitTime;
+	}
+	
 	String snapshot() {
 		return this.PID + "\t|" + this.priority
 				+ "\t\t|" + this.burstLength;
+	}
+	
+	String finalSnapshot() {
+		return this.PID + "\t|" + this.priority
+				+ "\t\t|" + this.burstLength + "\t\t\t" + this.waitTime;
 	}
 }

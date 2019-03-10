@@ -8,24 +8,31 @@ public class Tester {
 	public static Random randomGenerator = new Random();		
 	public static ReadyQueue readyQueue = new ReadyQueue(); 
 
+
 	public static void main(String[] args) {
-
-
-
 		//create 5 random processes with distince IDs
 		generate5processes();	
 		//display initial snapshot of ready queue
 		displayQueueSnapshot();
 
 		//Allow user to create new processes
-		createNewProcess();
-
+		createNewProcesses();
 		
+		int processingTime = getTotalBurstTimes();
 
+		//(i) Non-preemptive SJF
+		SJF runSJF = new SJF(readyQueue);
+		runSJF.run();
+		/*
+		//(ii) Non-preemptive priority
+		nonPreemptivePriority runNPP = new nonPreemptivePriority(readyQueue);
+		//(iii) round robin with time quantum 20.
+		RoundRobin runRR = new RoundRobin(readyQueue);
+		*/
 	}//end of main method
 
 
-	private static void createNewProcess() {
+	private static void createNewProcesses() {
 		boolean queueIsNotFull = true;
 		boolean stop = false;
 		while (!stop && queueIsNotFull ) {
@@ -35,16 +42,16 @@ public class Tester {
 			case "Y": createUserProcess();
 						  if ( readyQueue.isFull(readyQueue) ) {//ensure queue is not already full
 							  queueIsNotFull=false;
+							  System.out.println("Ready Queue is at max capacity");
 						  }
 				break;
 			case "N":  
 				stop = true; 
 				break;
-			default: System.out.println("Invalid input! Enter capitol Y or N. Try Again");
+			default: System.out.println("Invalid input! Enter capitol Y or N. Try Again!");
 			//call this method again
 			break;
 			}
-			System.out.println("Stop is now: "  + stop );
 		}//end of while loop
 		System.out.println("\n\nDone with creating processes...heres a new snapshot: " );
 		displayQueueSnapshot();
@@ -83,7 +90,7 @@ public class Tester {
 	//determines if 'id' is already assigned to an existing process
 	static boolean PIDavailable(int id) {
 		if (!(id >= 0 && id <= 10)) {
-			////System.out.println("ID must be 0 - 10");
+			System.out.println("!!!Error!!! --- ID must be 0 - 10");
 			return false;
 		}
 		if (readyQueue.isEmpty(readyQueue)) {
@@ -115,7 +122,7 @@ public class Tester {
 				System.out.println("\n\n!USER Added process " + p.getID() + "---queue size is now: " + readyQueue.size);////
 
 			} else {
-				System.out.println("Process ID must be 0 - 10! Try again!");
+				System.out.println("Try again!");
 		    }//end of if-else statement 
 		} 
 
@@ -156,6 +163,14 @@ public class Tester {
 		return userPriority;
 	}
 
+	static int getTotalBurstTimes() {
+		int time=0;
+		for (int i =0; i < readyQueue.size; i++) {
+			time += readyQueue.processList[i].getBurstLength(); 
+			//System.out.println("Total Burst time: " + time + " ----after process" + readyQueue.processList[i].getID());	
+		}
+	    return time;
+	}
 
 
 }//end of Tester.java class
