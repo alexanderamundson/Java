@@ -1,7 +1,7 @@
 /*Instructions:
  * Use multithreading to calculate the sum of values in the rows and columns of a 2d array.
  * The 2d array will be provided in a text file. The user must enter the text file's name.
- * 
+ */ 
 //Alexander Amundson
 //Operating Systems
 //Spring 2019
