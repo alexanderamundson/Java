@@ -4,36 +4,53 @@
 //Assignment2 (CPU scheduling algorithms simulation)
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Collections;
+import java.util.ArrayList;
+
 public class Tester {
 	public static Scanner scan = new Scanner(System.in);
 	public static Random randomGenerator = new Random();		
 	public static ReadyQueue readyQueue = new ReadyQueue(); 
 
-
 	public static void main(String[] args) {
-		//create 5 random processes with distince IDs
+		try {
+		//create 5 random processes with distinct IDs
 		generate5processes();	
+		
 		//display initial snapshot of ready queue
 		displayQueueSnapshot();
 
 		//Allow user to create new processes
 		createNewProcesses();
 		
-		//int processingTime = getTotalBurstTimes();
-		
-		//(i) Non-preemptive SJF
+		// Run  Non-preemptive SJF
 		SJF runSJF = new SJF(readyQueue);
-		float avg1 = runSJF.run();
+		System.out.println("Starting Shortest Job First Algorithm"  );
+		float SJFAvgWait = runSJF.run();
 		readyQueue.resetQueue();
-		//(ii) Non-preemptive priority
+		
+		//Run  Non-preemptive priority
 		nonPreemptivePriority runNPP = new nonPreemptivePriority(readyQueue);
-		float avg2 = runNPP.run();
-		/*(iii) round robin with time quantum 20.
+		System.out.println("Starting Non-Preemptive Priority Algorithm"  );
+		float NPPAvgWait = runNPP.run();
+		readyQueue.resetQueue();
+		
+		//Run round robin with time quantum 20.
 		RoundRobin runRR = new RoundRobin(readyQueue);
-		*/
+		System.out.println("Starting Round Robin"  );
+		float RRAvgWait =  runRR.run();
+		System.out.println("-->Average Wait time for RR " +  RRAvgWait   );//invoke run method in Round Robing .java
+		
+		//Display average wait of all three algorithms
+		displayAscending(SJFAvgWait, NPPAvgWait, RRAvgWait);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}//end of main method
 
-
+	
+	//Asks user if he/she wants to create new process (until queue is full)
 	private static void createNewProcesses() {
 		boolean queueIsNotFull = true;
 		boolean stop = false;
@@ -55,8 +72,11 @@ public class Tester {
 			break;
 			}
 		}//end of while loop
-		System.out.println("\n\nDone with creating processes...heres a new snapshot: " );
-		displayQueueSnapshot();
+		if (readyQueue.size > 5) {//if user creates additional processes, display new snapshot
+		  System.out.println("\nDone with creating processes...heres a new snapshot: " );
+		  displayQueueSnapshot();
+		}
+		readyQueue.initial_size=readyQueue.size;
 	}
 
 
@@ -77,13 +97,11 @@ public class Tester {
 		int randomPriority =999;
 		while (readyQueue.size < 5) {
 			randomID = randomGenerator.nextInt(11) + 0;
-			//System.out.println("ID " + randomID + " is available?  " + PIDavailable(randomID, queue));////
 			if (PIDavailable(randomID)) {
 				randomBurst = randomGenerator.nextInt(80) + 21;
 				randomPriority = randomGenerator.nextInt(10) + 1;
 				Process p = new Process(randomID, randomBurst , randomPriority);
 				readyQueue.addProcess(p);
-				//System.out.println("Added " + p.getID() + "\t-------queue size is now: " + queue.size);////
 			}
 		}//end of while loop
 	} 
@@ -106,15 +124,14 @@ public class Tester {
 		return true;
 	}
 
+	
 	//Creates process based on user input
 	private static void createUserProcess() {
 		int userID, userBurst, userPriority;
-		boolean keepTrying = true;//, priorityValidated = false, burstValidated = false;
-		
+		boolean keepTrying = true;
 		while (keepTrying) {
 			System.out.println("Enter a Process ID ( 0-10)" );
-			userID = scan.nextInt();
-			//System.out.println("ID " + userID + " is available?  " + PIDavailable(userID));////
+			userID = scan.nextInt();//User must enter int or Execption will ocurr
 			if (PIDavailable(userID)) {//Check if user inputs valid ID
 				keepTrying = false;
 				userBurst = validateBurstLength();
@@ -122,16 +139,14 @@ public class Tester {
 				Process p = new Process(userID, userBurst , userPriority);
 				readyQueue.addProcess(p);
 				System.out.println("\nYou Created process " + p.getID() + "---queue size is now: " + readyQueue.size);////
-
 			} else {
 				System.out.println("Try again!");
 		    }//end of if-else statement 
 		} 
-
 	}//end of createUserProcess method
 
 	
-	//validates user inputs burst length between 20-100
+	//Validates user inputs burst length between 20-100
 	static int validateBurstLength() {
 		boolean burstValidated = false;	
 		int input; int userBurst = 100;
@@ -147,6 +162,7 @@ public class Tester {
 		}
 		return userBurst;
 	}
+	
 	
 	//validates user inputs priority between 1-10
 	static int validatePriority() {
@@ -165,14 +181,27 @@ public class Tester {
 		return userPriority;
 	}
 
-	static int getTotalBurstTimes() {
-		int time=0;
-		for (int i =0; i < readyQueue.size; i++) {
-			time += readyQueue.processList[i].getBurstLength(); 
-			//System.out.println("Total Burst time: " + time + " ----after process" + readyQueue.processList[i].getID());	
-		}
-	    return time;
+		
+	//Display average wait time for each algorithm
+	static void displayAscending(float SJF, float NPP, float RR){
+		System.out.println("\nAlgorithms  from lowest to highest average waiting time.");	
+		ArrayList<Float> b = new ArrayList<Float>();
+		b.add(SJF); b.add(NPP); b.add(RR);
+		ArrayList<String> value = new ArrayList<String>();
+	    value.add("SJF average wait--"); value.add("NPP average wait--"); value.add("RR average wait--");
+		while (!b.isEmpty()) {
+		  int i;
+	      i = minIndex(b);
+	      System.out.println(value.get(i)+  b.get(i) );
+	      b.remove(i);
+	      value.remove(i);
+	    }
 	}
-
+   
+	
+	//returns index of minimum value in list
+	static int minIndex (ArrayList<Float> list) {
+		  return list.indexOf (Collections.min(list)); 
+     }
 
 }//end of Tester.java class
