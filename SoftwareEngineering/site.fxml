@@ -1,0 +1,50 @@
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.MenuItem?>
+
+<BorderPane fx:controller="sprint1.Controller"
+			fx:id="mainFrame"
+			xmlns:fx="http://javafx.com/fxml" >
+		<top>
+			<MenuBar>
+				<Menu text="File">
+					<items>
+						<MenuItem text="New..."/>
+						<SeparatorMenuItem />
+						<MenuItem text="Exit"/>
+					</items>
+				</Menu>
+			</MenuBar>
+		</top>
+		
+		<left>
+			<ListView fx:id="options" onMouseClicked="#handleClickListView">
+			</ListView>
+		</left>
+		
+		<center>
+		
+			<GridPane fx:id="mainFunction" vgap="10" hgap="10">
+			</GridPane>
+
+		</center>
+		<bottom>
+		<TextArea promptText="Welcome to Team 8 Site Manager" fx:id="optionInstructions" />
+		</bottom>
+</BorderPane>
+
+			
+	
+
+
