@@ -8,7 +8,6 @@ public class ASCII_Numeric_Conversion {
 		while (tryAgain) {
 			switch (choice) {
 			case 0: tryAgain = false;  closeProgram(scanner); 
-			           break;
 			case 1: ASCII_to_character(scanner);
 			           getUserChoice(scanner);
 			           break;
