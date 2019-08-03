@@ -30,6 +30,7 @@ public class UnicodeASCII {
 		StringBuilder options = new StringBuilder("\n\n------------Options------------ ");
 		options.append("\n0 -- to exit program\n1-- Convert ASCII number to char value");
 		options.append("\n2-- Convert character to Unicode value");
+		options.append("\n3-- Convert ASCII sentence to english sentence");
 		System.out.println(options);
 		return scanner.nextInt();
 	}
@@ -50,14 +51,15 @@ public class UnicodeASCII {
 
 	}
 
-	//
+	//Given the string 'input' which represents anASCII Sentence, 
+	//convert the input string into its equivalent character sequence.
 	private static void ASCII_sentence_to_character_string(Scanner scan) {
 		System.out.println("Enter a valid ASCII sentence string with NO spaces.");
 		System.out.println("enter only integer numbers: (e.g. /“71101101107115/” )");
 		String input = scan.next();
 		for (int i = 0,  num= 0; i < input.length(); i++) {
 			num = (num * 10)  + Integer.parseInt(""+(input.charAt(i)) );
-			//check if num is in ASCII number range (33 - 122)
+			//check if num is in ASCII range (33 - 122) that corresponds to upper and lowercase letters
 			if (num >= 33 && num <= 122) {
 				System.out.print((char)num);
 				num = 0;
