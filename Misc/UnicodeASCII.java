@@ -37,10 +37,10 @@ public class UnicodeASCII {
 
 	//Prints the character that corresponds to the given ASCII number
 	private static void ASCII_to_character(Scanner scan) {
-		int ascii = Integer.parseInt( scan.next() );
 		System.out.println("\nEnter an integer between 33 and 126");
-		String output = Character.toString((char) ascii);
-		System.out.printf("The ASCII value %d corresponds to the character: %8s", ascii, output);
+		int ascii = Integer.parseInt( scan.next() );
+		int output = (char)ascii;
+		System.out.printf("The ASCII value %d corresponds to the character: %8c", ascii, output);
 	}
 
 	//Prints the Unicode corresponding to character entered by user
@@ -73,7 +73,6 @@ public class UnicodeASCII {
 		scanner.close();
 		System.out.println("Successfully exiting current program and terminating running Java virtual machine");
 		System.exit(0);
-
 	}
 }
 
